@@ -46,10 +46,7 @@ def CZGate():
 def CZ_proc():
     circ = CZGate()
     proc = Processor("SLOS", circ)
-    proc.add_port(0, Port(Encoding.DUAL_RAIL, "ctrl")).add_port(
-        2, Port(Encoding.DUAL_RAIL, "data")
-    ).add_herald(4, 1).add_herald(5, 1)
-
+    proc.add_herald(4, 1).add_herald(5, 1)
     return proc
 
 
