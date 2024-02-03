@@ -17,7 +17,7 @@ The documentation page of Quandela  that we reference is here
 We implement the 3-mode linear optical CCZ gate defined as:
 
 
-$$CCZ\ket{x_1,x_2,X_3}=(-1)^{x_1x_2x_3}\ket{x_1,x_2,X_3}$$
+$$CCZ\ket{x_1,x_2,x_3}=(-1)^{x_1x_2 x_3}\ket{x_1,x_2,x_3}$$
 
 
 # Install the required package
