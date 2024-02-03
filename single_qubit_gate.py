@@ -1,3 +1,5 @@
+
+import perceval as pcvl
 from perceval.components.unitary_components import PS, BS, PERM
 import numpy as np
 

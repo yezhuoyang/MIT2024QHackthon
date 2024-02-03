@@ -4,6 +4,7 @@ import math
 from perceval import Processor, PostSelect, Circuit, Port
 from perceval.utils import Encoding
 
+
 """
 Four modes,  2 180 Wave plate , 2 Perm , 2 (54.74,0)PBS, 2 (-54.74,0)PBS, 2 post selection
 """
