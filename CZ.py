@@ -7,14 +7,20 @@ Four modes,  2 180 Wave plate , 2 Perm , 2 (54.74,0)PBS, 2 (-54.74,0)PBS, 2 post
 '''
 
 
-
-def CZGate():
-
+'''
+Implement the CZ gate with 6 modes
+Input: four parameters, which denotes the four angles
+'''
+def CZGate_6modes(params):
 
     proc = Processor("SLOS", 6)
 
     # Defining the circuit
     circuit = pcvl.Circuit(6)
+
+    circuit.add(1, PS(phi=np.pi))
+    circuit.add(3, PS(phi=np.pi))
+
 
     circuit.add(0, PERM([0, 1, 2, 4, 3, 5]))
     circuit.add(0, PERM([0, 1, 3, 2, 4, 5]))
@@ -40,6 +46,20 @@ def CZGate():
 
     # Set Post Selection
     proc.set_postselection(PostSelect("[4,5] == 1"))
+
+    final_circuit = proc.linear_circuit()
+
+    return pcvl.pdisplay(final_circuit.U)
+
+
+'''
+Implement the CZ gate with 4 modes
+Input: four parameters, which denotes the four angles
+'''
+def CZGate_4modes(params):
+    return
+
+
 
 
 
