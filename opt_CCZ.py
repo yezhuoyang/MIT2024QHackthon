@@ -6,61 +6,61 @@ from perceval import Processor, PostSelect, Circuit
 
 
 def set_phis(phis, values):
-    phis = [phis[i].set_value(values[i]) for i in range(6)]
+    phis = [phis[i].set_value(values[i]) for i in range(4)]
 
 
 def set_thetas(thetas, values):
-    thetas = [thetas[i].set_value(values[i]) for i in range(14)]
+    thetas = [thetas[i].set_value(values[i]) for i in range(12)]
 
 
 def create_paramaters(params):
-    phis = [pcvl.P("Phi" + str(i)) for i in range(0, 6)]
-    thetas = [pcvl.P("Theta" + str(i)) for i in range(0, 14)]
-    set_phis(phis, params[0:6])
-    set_thetas(thetas, params[6:])
+    phis = [pcvl.P("Phi" + str(i)) for i in range(0, 4)]
+    thetas = [pcvl.P("Theta" + str(i)) for i in range(0, 12)]
+    set_phis(phis, params[0:4])
+    set_thetas(thetas, params[4:])
     return phis, thetas
 
 
 def CCZ_9mode(phis, thetas):
     mzi = pcvl.Circuit(m=6, name="CCZ6")
-    for i in range(len(phis[0:6])):
+    for i in range(len(phis[0:4])):
         mzi.add(i, PS(phis[i]))
 
-    mzi.add((2, 3), BS(thetas[1]))
+    mzi.add((2, 3), BS(thetas[0]))
     mzi.add(2, PERM([1, 0]))
-    mzi.add((3, 4), BS(thetas[2]))
+    mzi.add((3, 4), BS(thetas[1]))
     mzi.add(3, PERM([1, 0]))
-    mzi.add((4, 5), BS(thetas[3]))
+    mzi.add((4, 5), BS(thetas[2]))
     mzi.add(3, PERM([1, 0]))
     mzi.add(2, PERM([1, 0]))
 
     mzi.add(1, PERM([1, 0]))
-    mzi.add((2, 3), BS(thetas[4]))
+    mzi.add((2, 3), BS(thetas[3]))
     mzi.add(2, PERM([1, 0]))
-    mzi.add((3, 4), BS(thetas[5]))
+    mzi.add((3, 4), BS(thetas[4]))
     mzi.add(3, PERM([1, 0]))
-    mzi.add((4, 5), BS(thetas[7]))
-    mzi.add(3, PERM([1, 0]))
-    mzi.add(2, PERM([1, 0]))
-    mzi.add(1, PERM([1, 0]))
-
-    mzi.add(0, PERM([1, 0]))
-    mzi.add(1, PERM([1, 0]))
-    mzi.add((2, 3), BS(thetas[8]))
-    mzi.add(2, PERM([1, 0]))
-    mzi.add((3, 4), BS(thetas[9]))
-    mzi.add(3, PERM([1, 0]))
-    mzi.add((4, 5), BS(thetas[10]))
+    mzi.add((4, 5), BS(thetas[5]))
     mzi.add(3, PERM([1, 0]))
     mzi.add(2, PERM([1, 0]))
     mzi.add(1, PERM([1, 0]))
-    mzi.add(0, PERM([1, 0]))
-
-    mzi.add((0, 1), BS(thetas[11]))
-    mzi.add((1, 2), BS(thetas[12]))
 
     mzi.add(0, PERM([1, 0]))
-    mzi.add((1, 2), BS(thetas[13]))
+    mzi.add(1, PERM([1, 0]))
+    mzi.add((2, 3), BS(thetas[6]))
+    mzi.add(2, PERM([1, 0]))
+    mzi.add((3, 4), BS(thetas[7]))
+    mzi.add(3, PERM([1, 0]))
+    mzi.add((4, 5), BS(thetas[8]))
+    mzi.add(3, PERM([1, 0]))
+    mzi.add(2, PERM([1, 0]))
+    mzi.add(1, PERM([1, 0]))
+    mzi.add(0, PERM([1, 0]))
+
+    mzi.add((0, 1), BS(thetas[9]))
+    mzi.add((1, 2), BS(thetas[10]))
+
+    mzi.add(0, PERM([1, 0]))
+    mzi.add((1, 2), BS(thetas[11]))
     mzi.add(0, PERM([1, 0]))
 
     return mzi
@@ -120,15 +120,15 @@ def fidelity(params):
     }
     ca.compute(expected=truth_table)
     print(ca.fidelity.real, ca.performance)
-    return -ca.fidelity.real
+    return -100 * ca.fidelity.real - ca.performance
 
 
 def optimize_CCZ():
-    params = np.random.uniform(low=0, high=2 * np.pi, size=20)
-    bounds = [(0, 2 * np.pi) for _ in range(20)]
+    params = np.random.uniform(low=0, high=2 * np.pi, size=16)
+    bounds = [(0, 2 * np.pi) for _ in range(16)]
 
     # Use the minimize function with bounds
-    res = minimize(fidelity, params, method="COBYLA", bounds=bounds)
+    res = minimize(fidelity, params, method="SLSQP", bounds=bounds)
     cir = CCZ_9mode(*create_paramaters(res.x))
     pcvl.pdisplay(cir)
     print(res.x)
