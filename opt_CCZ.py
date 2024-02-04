@@ -3,6 +3,9 @@ import perceval as pcvl
 from scipy.optimize import minimize
 import numpy as np
 from perceval import Processor, PostSelect, Circuit
+import matplotlib.pyplot as plt
+
+result = []
 
 
 def set_phis(phis, values):
@@ -120,6 +123,7 @@ def fidelity(params):
     }
     ca.compute(expected=truth_table)
     print(ca.fidelity.real, ca.performance)
+    result.append((ca.fidelity.real, ca.performance))
     return 1e7 * np.log(2 - ca.fidelity.real) - 10 * np.log(ca.performance + 1)
 
 
@@ -144,7 +148,7 @@ def optimize_CCZ():
         5.18063196,
         1.13067133,
     ]
-    # params = np.random.uniform(low=0, high=2 * np.pi, size=18)
+    params = np.random.uniform(low=0, high=2 * np.pi, size=18)
     bounds = [(0, 2 * np.pi) for _ in range(18)]
 
     # Use the minimize function with bounds
@@ -156,3 +160,32 @@ def optimize_CCZ():
 
 if __name__ == "__main__":
     optimize_CCZ()
+    y1, y2 = zip(*result)
+    x = np.array(range(len(y1)))
+
+    # Create two subplots
+    fig, axs = plt.subplots(
+        2, 1, figsize=(10, 10)
+    )  # 2 rows, 1 column, adjust figure size as needed
+
+    # Plot y1 vs x on the first subplot
+    axs[0].plot(x, y1, label="Fidelity", marker="o", color="blue")
+    axs[0].set_title("Fidelity")
+    axs[0].set_xlabel("Step")
+    axs[0].set_ylabel("Fidelity")
+    axs[0].grid(True)
+    axs[0].legend()
+
+    # Plot y2 vs x on the second subplot
+    axs[1].plot(x, y2, label="Performance", marker="s", color="red")
+    axs[1].set_title("Performance")
+    axs[1].set_xlabel("Step")
+    axs[1].set_ylabel("Performance")
+    axs[1].grid(True)
+    axs[1].legend()
+
+    # Adjust layout to prevent overlap
+    plt.tight_layout()
+
+    # Show the plots
+    plt.show()
