@@ -23,9 +23,9 @@ $$CCZ\ket{x_1,x_2,x_3}=(-1)^{x_1x_2 x_3}\ket{x_1,x_2,x_3}$$
 
 # Our result
 
-![alt text]([http://url/to/img.png](https://github.com/yezhuoyang/MIT2024QHackthon/blob/main/Figure/train.png))
+![alt text](Figure/train.png)
 
-![alt text]([[http://url/to/img.png](https://github.com/yezhuoyang/MIT2024QHackthon/blob/main/Figure/train.png](https://github.com/yezhuoyang/MIT2024QHackthon/blob/main/Figure/structure.png)))
+![alt text]([[http://url/to/img.png](Figure/structure.png)))
 
 
 
