@@ -25,7 +25,7 @@ $$CCZ\ket{x_1,x_2,x_3}=(-1)^{x_1x_2 x_3}\ket{x_1,x_2,x_3}$$
 
 ![alt text](Figure/train.png)
 
-![alt text]([[http://url/to/img.png](Figure/structure.png)))
+![alt text](Figure/structure.png)
 
 
 
