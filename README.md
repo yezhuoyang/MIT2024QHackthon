@@ -47,8 +47,14 @@ $$CCZ\ket{x_1,x_2,x_3}=(-1)^{x_1x_2 x_3}\ket{x_1,x_2,x_3}$$
 | Best result |       0.9999999972040188   | 0.00013705153692927373            | 6             |3                  |-0.028765559400252796                   |
 
 
+## Training loss
+
+The loss function that we choose to minimize is 
+
+$$Loss=10^7 \times \log(2-fidelity)-10 \times \log(performance+1)$$
 
 ![alt text](Figure/train.png)
+
 
 ![alt text](Figure/structure.png)
 
