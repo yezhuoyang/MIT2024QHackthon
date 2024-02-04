@@ -1,4 +1,17 @@
 # MIT2024QHackthon
+
+# Team: QuBruin
+
+<img src="Figure/Logo.png" alt="alt text" width="200"> 
+This is the logo for our team.
+
+We are three Master students from UCLA MQST project looking for internship right now. Please contack us if you are interested.
+
+
+[UCLA MQST program webpage](https://qst.ucla.edu/)
+
+
+Zhuoyang Ye, Yarin Heffes, Roberto Negrin
 This is the solution for 2024 MIT Hackathon.
 
 
@@ -66,7 +79,13 @@ The structure of our CCZ implementation is shown in the following figure:
 
 # Innovation
 
+While we succeeded in demonstrating remarkable fidelity and performance for the CCZ gate using the naïve scipy.optimize approach, we wanted to implement a neural network that implements the procedure as developed in the paper, Uskov et. al. (2008). Our neural network succeeds in reproducing the earleir results for a perfect-fidelity CZ-gate with a performance 2/27, and the architecture is wanting only minor but critical adjustments to achieve similar results for the CCZ gate. The neural network operates on n data modes and m auxiliary modes. The architect decides an array of pairings for two-mode Rx gates. The neural network will initialize each mode with a different phase, and then, together with the parameters theta for the Rx gates, will produce a (m+n) by (m+n) unitary matrix applied to the modes. Then, the procedure from the paper is used to "trace-out" the auxiliary qubits and return the matrix A which is to be compared with a target matrix At, which for our purposes is the CZ or CCZ gate. The network computes the gradient for a more "intelligent" or "physically aware" optimization procedure. The results of the optimization for the CZ gate are shown below, and the judge is encouraged to review the python notebook located TorchSandbox folder. 
 
+
+![alt text](Figure/fidelity_torch.png)
+![alt text](Figure/performance_torch.png)
+
+The beatiful quality of these plots is that they demonstrate that the neural network "prioritizes" the fidelity, optimizing it first before tuning the performance. 
 
 
 # Install the required package
@@ -130,15 +149,3 @@ python opt_CCZ.py
 
 [6] Uskov, D. B., Kaplan, L., Smith, A. M., Huver, S. D., & Dowling, J. P. (2009). Maximal success probabilities of linear-optical quantum gates. Physical Review A, 79(4), 042326.
 
-
-# Team: Entangle Bruin
-
-![alt text](Figure/Logo.png)
-
-We are three Master students from UCLA MQST project looking for internship right now. Please contack us if you are interested.
-
-
-[UCLA MQST program webpage](https://qst.ucla.edu/)
-
-
-Zhuoyang Ye, Yarin Heffes, Roberto Negrin
