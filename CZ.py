@@ -1,18 +1,7 @@
 from perceval.components.unitary_components import PS, BS, PERM
 import perceval as pcvl
 import math
-from perceval import Processor, PostSelect, Circuit, Port
-from perceval.utils import Encoding
-
-
-"""
-Four modes,  2 180 Wave plate , 2 Perm , 2 (54.74,0)PBS, 2 (-54.74,0)PBS, 2 post selection
-"""
-
-"""
-Implement the CZ gate with 6 modes
-Input: four parameters, which denotes the four angles
-"""
+from perceval import Processor, Circuit
 
 
 def CZ_4mode():
