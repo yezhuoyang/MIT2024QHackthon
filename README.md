@@ -22,6 +22,21 @@ $$CCZ\ket{x_1,x_2,x_3}=(-1)^{x_1x_2 x_3}\ket{x_1,x_2,x_3}$$
 
 
 
+1. Learning and reproducing
+  - we read the documentation of Quandela and implement all the basic single qubit gates
+  - We read the reference papers
+  - We repreduce the implementation of CZ gate
+
+
+2.Design the circuit
+   - We understand the circuit design of CZ gate: Pair each of the herald mode with one of the data mode
+   - We generalize the method used in designing CZ gate for designing CCZ gate
+   - We optimize and modify the design.
+
+     
+3.Optimization
+   - We try to optimize the CZ gate with scipy
+   - Fix the design and number of parameters, we optimize the parameters used in CCZ gate
 
 
 # Our result
