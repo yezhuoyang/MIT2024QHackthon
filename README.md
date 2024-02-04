@@ -5,13 +5,16 @@
 <img src="Figure/Logo.png" alt="alt text" width="200"> 
 This is the logo for our team.
 
-We are three Master students from UCLA MQST project looking for internship right now. Please contack us if you are interested.
+We are three Master students from UCLA MQST project looking for internship right now.
+
+Please contack us if you are interested.
 
 
 [UCLA MQST program webpage](https://qst.ucla.edu/)
 
 
-Zhuoyang Ye, Yarin Heffes, Roberto Negrin
+**Zhuoyang Ye, Yarin Heffes, Roberto Negrin**
+
 This is the solution for 2024 MIT Hackathon.
 
 
