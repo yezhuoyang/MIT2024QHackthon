@@ -120,11 +120,12 @@ def fidelity(params):
     }
     ca.compute(expected=truth_table)
     print(ca.fidelity.real, ca.performance)
-    return -100 * ca.fidelity.real - ca.performance
+    return 1e7 * np.log(2 - ca.fidelity.real) - 10 * np.log(ca.performance + 1)
 
 
 def optimize_CCZ():
     params = [
+        2.16229035,
         2.32355081,
         3.14159843,
         4.20592149,
@@ -135,7 +136,6 @@ def optimize_CCZ():
         1.48332889,
         0.19210323,
         1.94935521,
-        1.45815626,
         0.81566202,
         1.25720826,
         0.93387039,
