@@ -131,7 +131,9 @@ python opt_CCZ.py
 [6] Uskov, D. B., Kaplan, L., Smith, A. M., Huver, S. D., & Dowling, J. P. (2009). Maximal success probabilities of linear-optical quantum gates. Physical Review A, 79(4), 042326.
 
 
-# Team member
+# Team: Entangle Bruin
+
+![alt text](Figure/Logo.png)
 
 We are three Master students from UCLA MQST project looking for internship right now. Please contack us if you are interested.
 
