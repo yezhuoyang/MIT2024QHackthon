@@ -20,6 +20,20 @@ We implement the 3-mode linear optical CCZ gate defined as:
 $$CCZ\ket{x_1,x_2,x_3}=(-1)^{x_1x_2 x_3}\ket{x_1,x_2,x_3}$$
 
 
+
+# Our result
+
+![alt text]([http://url/to/img.png](https://github.com/yezhuoyang/MIT2024QHackthon/blob/main/Figure/train.png))
+
+![alt text]([[http://url/to/img.png](https://github.com/yezhuoyang/MIT2024QHackthon/blob/main/Figure/train.png](https://github.com/yezhuoyang/MIT2024QHackthon/blob/main/Figure/structure.png)))
+
+
+
+# Innovation
+
+
+
+
 # Install the required package
 
 In windows:
@@ -34,20 +48,23 @@ In Mac, Linux or Ubuntu:
 pip install -r requirements.txt 
 ```
 
-# Run the main function
+# Run the grader
 
 
 In windows:
 
 ```console
-py main.py
+py auto_grader.py
 ```
 
 In Mac, Linux or Ubuntu:
 
 ```console
-python3 main.py
+py auto_grader.py
 ```
+# Reproduce our result
+
+
 
 
 # Reference
