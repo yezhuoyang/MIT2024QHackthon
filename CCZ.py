@@ -1,47 +1,64 @@
 from perceval.components.unitary_components import PS, BS, PERM
 import perceval as pcvl
 import numpy as np
-from perceval import Processor, PostSelect
+from perceval import Processor, PostSelect, Matrix, Circuit, Unitary
+
+m = Matrix([[0.509824528533959, 0, 0, 0, 0, 0, 0, 0, 0, 0.860278414296864, 0, 0],
+            [0, 0.509824528533959, 0, 0.321169327626332 + 0.556281593281541j, 0, 0, 0.330393705586394,
+             - 0.165196852793197 - 0.286129342288294j, -0.165196852793197 + 0.286129342288294j, 0, 0, 0],
+            [0, 0, 0.509824528533959, 0, 0, 0, 0, 0, 0, 0, 0.860278414296864, 0],
+            [0, 0, 0, 0.509824528533959, 0, 0.321169327626332 + 0.556281593281541j, -0.165196852793197
+             + 0.286129342288294j, 0.330393705586394, -0.165196852793197 - 0.286129342288294j, 0, 0, 0],
+            [0, 0, 0, 0, 0.509824528533959, 0, 0, 0, 0, 0, 0, 0.860278414296864],
+            [0, 0.321169327626332 + 0.556281593281541j, 0, 0, 0, 0.509824528533959, -0.165196852793197
+             - 0.286129342288294j, -0.165196852793197 + 0.286129342288294j, 0.330393705586394, 0, 0, 0],
+            [0, 0.330393705586394, 0, -0.165196852793197 - 0.286129342288294j, 0, -0.165196852793197
+             + 0.286129342288294j, -0.509824528533959, 0, -0.321169327626332 + 0.556281593281541j, 0, 0, 0],
+            [0, -0.165196852793197 + 0.286129342288294j, 0, 0.330393705586394, 0, -0.165196852793197
+             - 0.286129342288294j, -0.321169327626332 + 0.556281593281541j, -0.509824528533959, 0, 0, 0, 0],
+            [0, -0.165196852793197 - 0.286129342288294j, 0, -0.165196852793197 + 0.286129342288294j, 0,
+             0.330393705586394, 0, -0.321169327626332 + 0.556281593281541j, -0.509824528533959, 0, 0, 0],
+            [0.860278414296864, 0, 0, 0, 0, 0, 0, 0, 0, -0.509824528533959, 0, 0],
+            [0, 0, 0.860278414296864, 0, 0, 0, 0, 0, 0, 0, -0.509824528533959, 0],
+            [0, 0, 0, 0, 0.860278414296864, 0, 0, 0, 0, 0, 0, -0.509824528533959]])
 
 
+def CCZ_6Herald_mode():
+    circ = Circuit(12, name="PostProcessed CCZ").add(0, Unitary(m))
+    proc = Processor("SLOS", circ)
+    proc.set_postselection(PostSelect("[0,1]==1 & [2,3]==1 & [4,5]==1"))
+    proc.add_herald(6, 0).add_herald(7, 0)
+    proc.add_herald(8, 0).add_herald(9, 0)
+    proc.add_herald(10, 0).add_herald(11, 0)
+    return proc
 
 
-
-
-def test_CZ_6modes():
-    # First,we convert the CZ to a CNOT
-    proc = Processor("SLOS", 6)
-    proc.add(2, BS.H())
-    add_CZGate_6modes(proc)
-    proc.add(2, BS.H())
+def test_CCZ():
+    proc = Processor("SLOS", )
+    proc.add(4, pcvl.BS.H())
+    proc.add(0, CCZ_6Herald_mode())
+    proc.add(4, pcvl.BS.H())
 
     states = {
-        pcvl.BasicState([1, 0, 1, 0, 0, 0]): "00",
-        pcvl.BasicState([1, 0, 1, 0, 0, 1]): "00",
-        pcvl.BasicState([1, 0, 1, 0, 1, 0]): "00",
-        pcvl.BasicState([1, 0, 1, 0, 1, 1]): "00",
-        pcvl.BasicState([1, 0, 0, 1, 0, 0]): "01",
-        pcvl.BasicState([1, 0, 0, 1, 0, 1]): "01",
-        pcvl.BasicState([1, 0, 0, 1, 1, 0]): "01",
-        pcvl.BasicState([1, 0, 0, 1, 1, 1]): "01",
-        pcvl.BasicState([0, 1, 1, 0, 0, 0]): "10",
-        pcvl.BasicState([0, 1, 1, 0, 0, 1]): "10",
-        pcvl.BasicState([0, 1, 1, 0, 1, 0]): "10",
-        pcvl.BasicState([0, 1, 1, 0, 1, 1]): "10",
-        pcvl.BasicState([0, 1, 0, 1, 0, 0]): "11",
-        pcvl.BasicState([0, 1, 0, 1, 0, 1]): "11",
-        pcvl.BasicState([0, 1, 0, 1, 1, 0]): "11",
-        pcvl.BasicState([0, 1, 0, 1, 1, 1]): "11"
+        pcvl.BasicState([1, 0, 1, 0, 1, 0]): "000",
+        pcvl.BasicState([1, 0, 1, 0, 0, 1]): "001",
+        pcvl.BasicState([1, 0, 0, 1, 1, 0]): "010",
+        pcvl.BasicState([1, 0, 0, 1, 0, 1]): "011",
+        pcvl.BasicState([0, 1, 1, 0, 1, 0]): "100",
+        pcvl.BasicState([0, 1, 1, 0, 0, 1]): "101",
+        pcvl.BasicState([0, 1, 0, 1, 1, 0]): "110",
+        pcvl.BasicState([0, 1, 0, 1, 0, 1]): "111"
     }
 
     ca = pcvl.algorithm.Analyzer(proc, states)
 
-    truth_table = {"00": "00", "01": "01", "10": "11", "11": "10"}
+    truth_table = {"000": "000", "001": "001", "010": "010", "011": "011",
+                   "100": "100", "101": "101", "110": "111", "111": "110"}
     ca.compute(expected=truth_table)
 
     pcvl.pdisplay(ca)
-    print(
-        f"performance = {ca.performance}, fidelity = {ca.fidelity.real}")
+    print(f"performance = {ca.performance}, fidelity = {ca.fidelity.real}")
 
 
-
+if __name__ == "__main__":
+    test_CCZ()
