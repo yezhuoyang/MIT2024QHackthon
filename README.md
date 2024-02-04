@@ -53,8 +53,12 @@ The loss function that we choose to minimize is
 
 $$Loss=10^7 \times \log(2-fidelity)-10 \times \log(performance+1)$$
 
+We use the COBYLA optimizer to minimize the above loss function to get the best parameters. The loss during the training process is plotted in the following figure:
+
 ![alt text](Figure/train.png)
 
+
+The structure of our CCZ implementation is shown in the following figure:
 
 ![alt text](Figure/structure.png)
 
