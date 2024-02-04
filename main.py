@@ -31,7 +31,7 @@ params = [
 
 
 def get_CCZ() -> pcvl.Processor:
-    phis,theta=create_paramaters(params)
+    phis,theta = create_paramaters(params)
     return CCZ_proc(phis,theta)
 
 
