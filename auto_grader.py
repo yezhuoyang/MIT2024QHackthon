@@ -135,6 +135,7 @@ def rate_processor(
 
     analyzer = pcvl.algorithm.Analyzer(cnot, mapping)
     analyzer.compute(expected=target)
+
     score = 0
 
     for criteria_name in criteria:
