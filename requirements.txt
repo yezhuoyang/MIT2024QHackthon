@@ -1,1 +1,2 @@
 perceval-quandela==0.10.3
+torch
