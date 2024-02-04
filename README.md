@@ -1,8 +1,8 @@
 # MIT2024QHackthon
-Solution for 2024 MIT Hackathon.
+This is the solution for 2024 MIT Hackathon.
 
 
-We choose the problem provided by Quandela.
+We choose the remote problem provided by Quandela.
 The original Link is here
 [Quandela_2024 problem](https://github.com/iQuHACK/2024_Quandela_Remote)
 
@@ -11,17 +11,27 @@ The documentation page of Quandela  that we reference is here
 [Quandela documentations](https://perceval.quandela.net/docs/)
 
 
-
 # Goal of our contest
 
 We implement the 3-mode linear optical CCZ gate defined as:
 
-
 $$CCZ\ket{x_1,x_2,x_3}=(-1)^{x_1x_2 x_3}\ket{x_1,x_2,x_3}$$
+
+
+# Our method and procedure 
+
+
 
 
 
 # Our result
+
+
+|                 | Fidelity    | Performance    |Photon numbers   |Herald mode numbers   |Score                 |
+| :---:           | :---:       | :---:          |:---:            |:---:                 |:---:                 |
+| Best result |       0.9999999972040188   | 0.00013705153692927373            | 6             |3                  |-0.028765559400252796                   |
+
+
 
 ![alt text](Figure/train.png)
 
@@ -60,12 +70,25 @@ py auto_grader.py
 In Mac, Linux or Ubuntu:
 
 ```console
-py auto_grader.py
+python auto_grader.py
 ```
 # Reproduce our result
 
+To reproduce our training result, you can run the following command in your own terminal:
 
+In windows:
 
+```console
+dir Optimization
+py opt_CCZ.py
+```
+
+In Mac, Linux or Ubuntu:
+
+```console
+cd Optimization
+python opt_CCZ.py
+```
 
 # Reference
 
