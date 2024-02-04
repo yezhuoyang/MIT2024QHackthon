@@ -1,28 +1,24 @@
 from perceval.components.unitary_components import PS, BS, PERM
 import perceval as pcvl
-import random
-import math
+from scipy.optimize import minimize
+import numpy as np
 from perceval import Processor, PostSelect, Circuit
 
 
-def create_paramaters():
+def set_phis(phis, values):
+    phis = [phis[i].set_value(values[i]) for i in range(6)]
+
+
+def set_thetas(thetas, values):
+    thetas = [thetas[i].set_value(values[i]) for i in range(9)]
+
+
+def create_paramaters(params):
     phis = [pcvl.P("Phi" + str(i)) for i in range(0, 6)]
     thetas = [pcvl.P("Theta" + str(i)) for i in range(0, 9)]
+    set_phis(phis, params[0:6])
+    set_thetas(thetas, params[6:])
     return phis, thetas
-
-
-def set_phis(phis, values=None):
-    if not values:
-        phis = [phis[i].set_value(random.random() * 2 * math.pi) for i in range(6)]
-    else:
-        phis = [phis[i].set_value(values[i]) for i in range(6)]
-
-
-def set_thetas(thetas, values=None):
-    if not values:
-        thetas = [thetas[i].set_value(random.random() * 2 * math.pi) for i in range(9)]
-    else:
-        thetas = [thetas[i].set_value(values[i]) for i in range(9)]
 
 
 def CCZ_9mode(phis, thetas):
@@ -79,12 +75,11 @@ def CCZ_proc(phis, thetas):
     return p1
 
 
-def fidelity(phis=None, thetas=None):
-    set_phis(phis)
-    set_thetas(thetas)
+def fidelity(params):
+    phis, thetas = create_paramaters(params)
     proc = Processor("SLOS")
     proc.add(4, pcvl.BS.H())
-    proc.add(0, p1)
+    proc.add(0, CCZ_proc(phis, thetas))
     proc.add(4, pcvl.BS.H())
 
     states = {
@@ -111,11 +106,16 @@ def fidelity(phis=None, thetas=None):
         "111": "110",
     }
     ca.compute(expected=truth_table)
+    print(ca.fidelity.real)
+    return -ca.fidelity.real
 
-    return ca.performance, ca.fidelity.real
+
+def optimize_CCZ():
+    params = np.ones(15)
+    res = minimize(fidelity, params, method="SLSQP")
+    print(res)
+    print(res.x)
 
 
 if __name__ == "__main__":
-    phis, thetas = create_paramaters()
-    p1 = CCZ_proc(phis, thetas)
-    print(fidelity(phis, thetas))
+    optimize_CCZ()
