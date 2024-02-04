@@ -141,6 +141,9 @@ cd Optimization
 python opt_CCZ.py
 ```
 
+
+**Note**: One of the team members spiled Coke on his laptop during the project, which is in part why we were not able to complente the NN component of our project. We are currently accepting donations for a new computer 🥲
+
 # Reference
 
 
